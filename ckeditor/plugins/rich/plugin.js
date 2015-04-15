@@ -9,6 +9,8 @@
 CKEDITOR.plugins.add( 'rich', {
     requires: 'widget',
     init: function( editor ) {
+    	var pluginDirectory = this.path;
+        editor.addContentsCss( pluginDirectory + 'styles/style.css' );
         editor.widgets.add( 'rich', {
 		    allowedContent: 'rich',
 		    requiredContent: 'rich',			
@@ -18,8 +20,7 @@ CKEDITOR.plugins.add( 'rich', {
 					if(parElmt == null) {
 						var spanParTag = new CKEDITOR.htmlParser.element( 'span' );
 						spanParTag.addClass('hlt');
-						var attrs = spanParTag.attributes;					
-						attrs.style = 'background-color: #FFFF00';
+						var attrs = spanParTag.attributes;
 						return element.wrapWith(spanParTag);	
 					}
 		    	}		    	
