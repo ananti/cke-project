@@ -12,28 +12,29 @@ CKEDITOR.plugins.add( 'rich', {
     	var pluginDirectory = this.path;
         editor.addContentsCss( pluginDirectory + 'styles/style.css' );
         editor.widgets.add( 'rich', {
-		    allowedContent: 'rich',
-		    requiredContent: 'rich',			
+		    allowedContent: 'pre(!personal)',
+		    requiredContent: 'pre(personal)',			
 		    upcast: function( element ) {
-		    	if(element.name == 'rich'){
+		    	if(element.name == 'pre' && element.hasClass('personal')){
 		    		var parElmt = element.getAscendant('span');
 					if(parElmt == null) {
 						var spanParTag = new CKEDITOR.htmlParser.element( 'span' );
-						spanParTag.addClass('hlt');
+						element.addClass('hlt');
 						var attrs = spanParTag.attributes;
 						return element.wrapWith(spanParTag);	
 					}
-		    	}		    	
+		    	}
+		    	//return element.name =='pre' && element.hasClass('personal');
             },
 			downcast: function( element ) {
 		    	if(element.name == 'span' && element.hasClass('hlt')){
-					var richElmt = element.getFirst('rich');
+					var richElmt = element.getFirst('pre');
             		return richElmt;
             	}
             },
             editables: {
 				content: {
-					selector: 'span.hlt',
+					selector: '.personal',
 					allowedContent: 'p br ul ol li strong em'
 				}
 			}

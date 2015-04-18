@@ -17,7 +17,12 @@
 <script>
 $(function() {
 	//hide form for first time
-	$('#form1').hide();
+	//$('#form1').hide();
+	CKEDITOR.replace( 'editor1',{
+		extraPlugins: 'rich',
+		skin: 'moononew',
+		allowedContent: true
+	});
 	//Show form
 	$("#b_editor").click(function() {
 		if($(this).html() == 'show') {
